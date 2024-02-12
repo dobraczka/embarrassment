@@ -64,31 +64,31 @@ Using pandas' [pipe](https://pandas.pydata.org/pandas-docs/stable/reference/api/
 Let's see a more elaborate example by loading a dataset from [sylloge](https://github.com/dobraczka/sylloge):
 
 ```python
-    from sylloge import MovieGraphBenchmark
-
-    from embarrassment import clean, neighbor_attr_triples, search, select_rel
-
-    ds = MovieGraphBenchmark()
-    # clean attribute triples
-    cleaned_attr = clean(ds.attr_triples_left)
-    # find uri of James Tolkan
-    jt = search(cleaned_attr, query="James Tolkan")["head"].iloc[0]
-    # get neighbor triples
-    # and select triples with title and show values
-    title_rel = "https://www.scads.de/movieBenchmark/ontology/title"
-    print(
-        neighbor_attr_triples(ds.rel_triples_left, cleaned_attr, jt).pipe(
+>>> from sylloge import MovieGraphBenchmark
+>>> from embarrassment import clean, neighbor_attr_triples, search, select_rel
+>>> ds = MovieGraphBenchmark()
+>>> # clean attribute triples
+>>> cleaned_attr = clean(ds.attr_triples_left)
+>>> # find uri of James Tolkan
+>>> jt = search(cleaned_attr, query="James Tolkan")["head"].iloc[0]
+>>> # get neighbor triples
+>>> # and select triples with title and show values
+>>> title_rel = "https://www.scads.de/movieBenchmark/ontology/title"
+>>> neighbor_attr_triples(ds.rel_triples_left, cleaned_attr, jt).pipe(
             select_rel, rel=title_rel
         )["tail"]
     )
-    # Output:
-    # 12234    A Nero Wolfe Mystery
-    # 12282           Door to Death
-    # 12440          Die Like a Dog
-    # 12461        The Next Witness
-    # Name: tail, dtype: object
+    12234    A Nero Wolfe Mystery
+    12282           Door to Death
+    12440          Die Like a Dog
+    12461        The Next Witness
+    Name: tail, dtype: object
 ```
 
 
 Installation
 ============
+You can install `embarrassment` via pip:
+```
+pip install embarrassment
+```
