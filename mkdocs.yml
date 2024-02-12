@@ -23,6 +23,7 @@ theme:
   features:
     - navigation.instant
     - navigation.tracking
+    - content.code.copy
 
 repo_name: dobraczka/embarrassment
 repo_url: https://github.com/dobraczka/embarrassment

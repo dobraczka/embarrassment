@@ -35,4 +35,3 @@ jobs:
         python -m pip install nox_poetry
     - name: Test with nox
       run: nox -s tests
-

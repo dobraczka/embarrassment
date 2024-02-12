@@ -3,11 +3,17 @@ from nox_poetry import Session, session
 
 @session()
 def tests(session: Session) -> None:
-    args = session.posargs or ["-m", "not slow", "--cov=embarrassment", "--cov-report=xml"]
+    args = session.posargs or [
+        "-m",
+        "not slow",
+        "--cov=embarrassment",
+        "--cov-report=xml",
+    ]
     session.install(".[all]")
     session.install("pytest")
     session.install("pytest-cov")
     session.install("pytest-mock")
+    session.install("strawman")
     session.run("pytest", *args)
 
 
@@ -49,8 +55,17 @@ def type_checking(session: Session) -> None:
         "--install-types",
         "--non-interactive",
         "--ignore-missing-imports",
-        *args
+        *args,
     )
+
+
+@session()
+def doctests(session: Session) -> None:
+    session.install(".")
+    session.install("xdoctest")
+    session.install("pygments")
+    session.run("xdoctest", "-m", "embarrassment")
+
 
 @session()
 def build_docs(session: Session) -> None:
