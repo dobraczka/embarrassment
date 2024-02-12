@@ -78,10 +78,9 @@ Let's see a more elaborate example by loading a dataset from [sylloge](https://g
 >>> # get neighbor triples
 >>> # and select triples with title and show values
 >>> title_rel = "https://www.scads.de/movieBenchmark/ontology/title"
->>> neighbor_attr_triples(ds.rel_triples_left, cleaned_attr, jt).pipe(
-            select_rel, rel=title_rel
-        )["tail"]
-    )
+>>> ds.rel_triples_left.pipe(
+        neighbor_attr_triples, attr_df=cleaned_attr, wanted_eid=jt
+    ).pipe(select_rel, rel=title_rel)["tail"]
     12234    A Nero Wolfe Mystery
     12282           Door to Death
     12440          Die Like a Dog
